@@ -2,7 +2,7 @@ import gestionPeVAU.*;
 public class main {
 
 	public static void main(String[] args) {
-		// Prueba de carga de sedes
+		// Prueba de carga de sedes, prueba commit
 		CargaFicheros prueba = new CargaFicheros();
 		prueba.cargarSedes("C:\\Users\\Judi\\Desktop\\Uni\\PruebasSede.txt");
 		
