@@ -10,7 +10,7 @@ public class main {
 		for(Sede s : Sede.listaSedes()) {
 			System.out.println(s);
 		}
-		
+//prueba
 	}
 
 }
