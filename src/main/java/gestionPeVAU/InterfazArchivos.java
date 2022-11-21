@@ -17,6 +17,7 @@ public class InterfazArchivos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textArchivo;
+	private CargaFicheros cargaFicheros;
 
 	/**
 	 * Launch the application.
@@ -38,6 +39,7 @@ public class InterfazArchivos extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfazArchivos() {
+		cargaFicheros = new CargaFicheros();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 558);
 		contentPane = new JPanel();
@@ -46,28 +48,39 @@ public class InterfazArchivos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnAlumnos = new JButton("Cargar datos de alumnos");
-		btnAlumnos.addActionListener(new ActionListener() {
+		textArchivo = new JTextField();
+		textArchivo.setBounds(156, 194, 410, 29);
+		contentPane.add(textArchivo);
+		textArchivo.setColumns(10);
+		
+		JButton btnMaterias = new JButton("Cargar datos de materias");
+		btnMaterias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String dir = textArchivo.getText();
+				cargaFicheros.cargarMaterias(dir);
 			}
 		});
-		btnAlumnos.setBounds(10, 172, 201, 40);
-		contentPane.add(btnAlumnos);
+		btnMaterias.setBounds(614, 282, 201, 40);
+		contentPane.add(btnMaterias);
 		
-		JButton btnUsuario = new JButton("Cargar datos de usuarios");
+		JButton btnUsuario = new JButton("Cargar datos de responsables");
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String dir = textArchivo.getText();
+				cargaFicheros.cargarResponsables(dir);
 			}
 		});
-		btnUsuario.setBounds(10, 102, 201, 40);
+		btnUsuario.setBounds(614, 188, 201, 40);
 		contentPane.add(btnUsuario);
 		
 		JButton btnSedes = new JButton("Cargar datos de sedes");
 		btnSedes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String dir = textArchivo.getText();
+				cargaFicheros.cargarSedes(dir);
 			}
 		});
-		btnSedes.setBounds(10, 236, 201, 40);
+		btnSedes.setBounds(614, 107, 201, 40);
 		contentPane.add(btnSedes);
 		
 		JButton btnInicio = new JButton("Inicio");
@@ -85,18 +98,7 @@ public class InterfazArchivos extends JFrame {
 		lblUsuario.setBounds(10, 28, 90, 30);
 		contentPane.add(lblUsuario);
 		
-		textArchivo = new JTextField();
-		textArchivo.setBounds(275, 113, 410, 29);
-		contentPane.add(textArchivo);
-		textArchivo.setColumns(10);
 		
-		JButton btnCargar = new JButton("Cargar");
-		btnCargar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCargar.setBounds(700, 113, 85, 29);
-		contentPane.add(btnCargar);
 	}
 	//Para que la funcion close funcione tiene que estar asi la operacion de cierre: setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	private void close() {
