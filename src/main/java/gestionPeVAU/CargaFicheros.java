@@ -41,8 +41,31 @@ public class CargaFicheros {
 		  }
 	}
 	
-	public void cargarResponsables() {
-		
+	public void cargarResponsables(String fichero) {
+		//fichero es el parametro con el directorio del CSV
+				BufferedReader br = null;
+				  try {
+				   String linea;
+
+				   br = new BufferedReader(new FileReader(fichero));
+
+				   while ((linea = br.readLine()) != null) {
+					   ResponsableDeSede s = new ResponsableDeSede(linea);
+				   }
+
+				  } catch (IOException e) {
+
+				   e.printStackTrace();
+
+				  } finally {
+
+				   try {
+				    if (br != null)
+				     br.close();
+				   } catch (IOException ex) {
+				    ex.printStackTrace();
+				   }
+				  }
 	}
 	
 	public void cargarMaterias() {
