@@ -4,10 +4,10 @@ public class main {
 	public static void main(String[] args) {
 		// main usado para testear funciones
 		
-		/*
+		
 		//Carga un fichero de sedes, lo sube a la BD e imprime en consola las sedes en BD,
-		CargaFicheros prueba = new CargaFicheros();
-		prueba.cargarSedes("C:\\Users\\Judi\\Desktop\\Uni\\PruebasSede.txt");
+		/*CargaFicheros prueba = new CargaFicheros();
+		prueba.cargarSedes("C:\\Users\\cgmoy\\Documents\\sedes_pevau.txt");
 		for(Sede s : Sede.listaSedes()) {
 			System.out.println(s);
 		}
@@ -16,11 +16,11 @@ public class main {
 		
 		/*
 		//Asigna algunos responsables
-		Sede s = new Sede("Nº 06 E.T.S.Ing. de Telecomunicación/ E.T.S. Ing. Informática");
-		ResponsableDeSede r = new ResponsableDeSede("Andrea Maltés Urieta");
+		Sede s = new Sede("Nï¿½ 06 E.T.S.Ing. de Telecomunicaciï¿½n/ E.T.S. Ing. Informï¿½tica");
+		ResponsableDeSede r = new ResponsableDeSede("Andrea Maltï¿½s Urieta");
 		s.setResponsable(r);
 		
-		Sede s2 = new Sede("Nº 15 I.E.S. Monterroso (Estepona)");
+		Sede s2 = new Sede("Nï¿½ 15 I.E.S. Monterroso (Estepona)");
 		ResponsableDeSede r2 = new ResponsableDeSede("Daniel Palazuelos Zamora");
 		s2.setResponsable(r2);
 		
@@ -38,12 +38,12 @@ public class main {
 		*/
 		
 		//Carga un fichero de materias, lo sube a la BD e imprime en consola las materias en BD
-		CargaFicheros prueba = new CargaFicheros();
+		/*CargaFicheros prueba = new CargaFicheros();
 		prueba.cargarMaterias("C:\\Users\\Judi\\git\\GestionSedesPeVAU\\Recurso\\materias_pevau.txt");
 		for(Materia m : Materia.listaMaterias()) {
 			System.out.println(m);
 		}
-		System.out.println("Fin");
+		System.out.println("Fin");*/
 	}
 
 }
