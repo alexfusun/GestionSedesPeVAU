@@ -22,6 +22,13 @@ public class ResponsableDeSede {
 		}
 		this.Nombre = n;
 	}
+	
+	public ResponsableDeSede(String n, boolean bol) {
+		//Crea la sede y lo inserta en la BD, si ya esta creada no hace nada
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		Object[] tupla = miBD.Select("SELECT Nombre FROM ResponsablesDeSede WHERE Nombre = '" + n + "'").get(0);
+		this.Nombre = (String)tupla[0];
+	}
 
 	public String getNombre() {
 		return this.Nombre;

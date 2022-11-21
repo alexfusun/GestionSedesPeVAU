@@ -21,11 +21,6 @@ import java.awt.Font;
 
 public class InterfazGestionSedes extends JFrame {
 	
-	private static String BD_SERVER = "serverproyectopevau.database.windows.net";
-	private static String BD_NAME = "PeVAU Database";
-	private static String BD_USER = "azureuser";
-	private static String BD_PASSWORD = "Requisitos2022!";
-
 	private JPanel contentPane;
 	private JTable table;
 
@@ -73,13 +68,22 @@ public class InterfazGestionSedes extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Sede", "Responsable"
+			}
+		));
 		scrollPane.setViewportView(table);
-		actualizarTabla();
+		crearTabla();
 		
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Sede seleccionada = Sede.listaSedes().get(table.getSelectedRow());
+				seleccionada.borrarSede();
+				actualizarTabla();
 			}
 		});
 		btnBorrar.setBounds(215, 370, 128, 40);
@@ -88,8 +92,15 @@ public class InterfazGestionSedes extends JFrame {
 		JButton btnAsignar = new JButton("Asignar Responsable");
 		btnAsignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfazResponsables ia = new InterfazResponsables();
-				ia.setVisible(true);
+				try {
+					InterfazResponsables ia = new InterfazResponsables(table.getSelectedRow());
+					ia.setVisible(true);	
+					close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+				
 			}
 		});
 		btnAsignar.setBounds(408, 370, 128, 40);
@@ -98,7 +109,9 @@ public class InterfazGestionSedes extends JFrame {
 		JButton btnDesasignar = new JButton("Desasignar responsable");
 		btnDesasignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Sede seleccionada = Sede.listaSedes().get(table.getSelectedRow());
+				seleccionada.setResponsable(null);
+				actualizarTabla();
 			}
 		});
 		btnDesasignar.setBounds(600, 370, 151, 40);
@@ -114,24 +127,28 @@ public class InterfazGestionSedes extends JFrame {
 			WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 			Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
 		}
-		private void actualizarTabla() {
+		private void crearTabla() {
 			try {
-				/*BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
-				ArrayList<Sede> lista = new ArrayList<Sede>();
-				for(Object[] tupla:miBD.Select("SELECT Nombre FROM Sedes")) {
-					lista.add(new Sede((String)tupla[0],true));
-				}*/
 				List<Sede> lista = Sede.listaSedes();
 				
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				Object fila[] = new Object[2];
+				Object columna[] = new Object[2];
 				for(int i =0; i<lista.size();i++) {
-					fila[0] = lista.get(i).getNombre();
-					fila[1] = null;
-					model.addRow(fila);
+					columna[0] = lista.get(i).getNombre();
+					columna[1] = lista.get(i).getResponsable();
+					model.addRow(columna);
 				}
 			} catch (BD_Error e) {
 				e.printStackTrace();
 			}
 		}
+		
+		private void actualizarTabla() {
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			model.getDataVector().removeAllElements();
+			model.fireTableDataChanged();
+			
+			crearTabla();
+		}
+		
 }
