@@ -51,7 +51,11 @@ public class Sede {
 	}
 	
 	public ResponsableDeSede getResponsable() {
-		return this.Responsable;
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		Object[] tupla = miBD.Select("SELECT ResponsableNombre FROM Sedes WHERE Nombre = '" + this.Nombre + "'").get(0);
+		ResponsableDeSede r = new ResponsableDeSede((String)tupla[0]);
+		return r;
+		
 	}
 	
 	public void setResponsable(ResponsableDeSede r) {
@@ -71,6 +75,7 @@ public class Sede {
 		}
 		return lista;
 	}
+	
 	
 	public void borrarSede() {
 		//Borrar un responsable en BD
