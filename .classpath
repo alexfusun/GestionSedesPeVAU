@@ -15,6 +15,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -23,6 +24,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Judi/Documents/Microsoft JDBC Driver 4.0 for SQL Server/sqljdbc_4.0/esn/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="sqljdbc4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
