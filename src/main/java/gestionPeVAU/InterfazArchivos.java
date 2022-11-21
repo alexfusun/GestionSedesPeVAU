@@ -98,6 +98,16 @@ public class InterfazArchivos extends JFrame {
 		lblUsuario.setBounds(10, 28, 90, 30);
 		contentPane.add(lblUsuario);
 		
+		JButton btnAlumnos = new JButton("Cargar datos de alumnos");
+		btnAlumnos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String dirString = textArchivo.getText();
+				cargaFicheros.cargarAlumnos(dirString);
+			}
+		});
+		btnAlumnos.setBounds(614, 370, 201, 40);
+		contentPane.add(btnAlumnos);
+		
 		
 	}
 	//Para que la funcion close funcione tiene que estar asi la operacion de cierre: setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
