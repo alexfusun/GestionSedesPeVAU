@@ -15,7 +15,7 @@ public class main {
 		*/
 		
 		/*
-		//Asigna algunos responsables y lo vuelve a imprimir en consola
+		//Asigna algunos responsables
 		Sede s = new Sede("Nº 06 E.T.S.Ing. de Telecomunicación/ E.T.S. Ing. Informática");
 		ResponsableDeSede r = new ResponsableDeSede("Andrea Maltés Urieta");
 		s.setResponsable(r);
@@ -36,6 +36,14 @@ public class main {
 		}
 		System.out.println("Fin");
 		*/
+		
+		//Carga un fichero de materias, lo sube a la BD e imprime en consola las materias en BD
+		CargaFicheros prueba = new CargaFicheros();
+		prueba.cargarMaterias("C:\\Users\\Judi\\git\\GestionSedesPeVAU\\Recurso\\materias_pevau.txt");
+		for(Materia m : Materia.listaMaterias()) {
+			System.out.println(m);
+		}
+		System.out.println("Fin");
 	}
 
 }

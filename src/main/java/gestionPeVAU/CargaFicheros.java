@@ -68,7 +68,30 @@ public class CargaFicheros {
 		}
 	}
 
-	public void cargarMaterias() {
+	public void cargarMaterias(String fichero) {
+		// fichero es el parametro con el directorio del CSV
+		BufferedReader br = null;
+		try {
+			String linea;
 
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fichero), "UTF-8"));
+
+			while ((linea = br.readLine()) != null) {
+				Materia m = new Materia(linea);
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 }
