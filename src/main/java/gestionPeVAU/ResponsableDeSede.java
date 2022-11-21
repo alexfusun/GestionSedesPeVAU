@@ -1,4 +1,7 @@
 package gestionPeVAU;
+
+import java.util.*;
+
 //Desarrollador -- Alex
 public class ResponsableDeSede {
 	
@@ -19,5 +22,38 @@ public class ResponsableDeSede {
 		}
 		this.Nombre = n;
 	}
+
+	public String getNombre() {
+		return this.Nombre;
+	}
+
+	public void setNombre(String n) {
+		//Modifica el nombre de la sede en BD
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		Object[] tupla = miBD.Select("SELECT Nombre FROM ResponsablesDeSede WHERE Nombre = '" + n + "'").get(0);
+		
+		if (tupla[0] == null) {
+			// error, ya existe una sede con el mismo nombre
+		} else {
+			miBD.Update("UPDATE ResponsablesDeSede SET Nombre = '" + n + "' WHERE Nombre = '" + this.Nombre + "'");
+			this.Nombre = n;
+		}
+	}
+	
+	public static List<ResponsableDeSede> listaResponsables() {
+		//Devuelve una lista con todas las sedes en BD
+		List<ResponsableDeSede> lista = new ArrayList<ResponsableDeSede>();
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		for(Object[] tupla:miBD.Select("SELECT Nombre FROM ResponsablesDeSede")) {
+			lista.add(new ResponsableDeSede((String)tupla[0]));
+		}
+		return lista;
+	}
+	
+	public String toString()
+    {
+    	return this.Nombre;
+    }
+
 
 }

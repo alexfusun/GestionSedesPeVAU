@@ -4,71 +4,71 @@ import java.io.*;
 import java.util.*;
 
 public class CargaFicheros {
-	
+
 	private static String BD_SERVER = "serverproyectopevau.database.windows.net";
 	private static String BD_NAME = "PeVAU Database";
 	private static String BD_USER = "azureuser";
 	private static String BD_PASSWORD = "Requisitos2022!";
-	
+
 	public CargaFicheros() {
-		
+
 	}
-	
+
 	public void cargarSedes(String fichero) {
-		//fichero es el parametro con el directorio del CSV
+		// fichero es el parametro con el directorio del CSV
 		BufferedReader br = null;
-		  try {
-		   String linea;
+		try {
+			String linea;
 
-		   br = new BufferedReader(new FileReader(fichero));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fichero), "UTF-8"));
 
-		   while ((linea = br.readLine()) != null) {
-			   Sede s = new Sede(linea);
-		   }
+			while ((linea = br.readLine()) != null) {
+				Sede s = new Sede(linea);
+			}
 
-		  } catch (IOException e) {
+		} catch (IOException e) {
 
-		   e.printStackTrace();
+			e.printStackTrace();
 
-		  } finally {
+		} finally {
 
-		   try {
-		    if (br != null)
-		     br.close();
-		   } catch (IOException ex) {
-		    ex.printStackTrace();
-		   }
-		  }
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
-	
+
 	public void cargarResponsables(String fichero) {
-		//fichero es el parametro con el directorio del CSV
-				BufferedReader br = null;
-				  try {
-				   String linea;
+		// fichero es el parametro con el directorio del CSV
+		BufferedReader br = null;
+		try {
+			String linea;
 
-				   br = new BufferedReader(new FileReader(fichero));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fichero), "UTF-8"));
 
-				   while ((linea = br.readLine()) != null) {
-					   ResponsableDeSede s = new ResponsableDeSede(linea);
-				   }
+			while ((linea = br.readLine()) != null) {
+				ResponsableDeSede s = new ResponsableDeSede(linea);
+			}
 
-				  } catch (IOException e) {
+		} catch (IOException e) {
 
-				   e.printStackTrace();
+			e.printStackTrace();
 
-				  } finally {
+		} finally {
 
-				   try {
-				    if (br != null)
-				     br.close();
-				   } catch (IOException ex) {
-				    ex.printStackTrace();
-				   }
-				  }
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
-	
+
 	public void cargarMaterias() {
-		
+
 	}
 }
