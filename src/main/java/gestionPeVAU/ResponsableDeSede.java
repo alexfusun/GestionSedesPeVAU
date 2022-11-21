@@ -50,6 +50,14 @@ public class ResponsableDeSede {
 		return lista;
 	}
 	
+	public void borrarResponsable() {
+		//Borrar un responsable en BD
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		miBD.Delete("DELETE ResponsablesDeSede WHERE Nombre = '" + this.Nombre + "'");
+		
+		this.Nombre = null;
+	}
+	
 	public String toString()
     {
     	return this.Nombre;
