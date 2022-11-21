@@ -44,6 +44,12 @@ public class main {
 			System.out.println(m);
 		}
 		System.out.println("Fin");*/
+		/*
+		CargaFicheros prueba = new CargaFicheros();
+		prueba.cargarAlumnos("Recurso\\datos-estudiantes-pevau.csv");
+		
+		System.out.println("Fin");
+		*/
 	}
 
 }

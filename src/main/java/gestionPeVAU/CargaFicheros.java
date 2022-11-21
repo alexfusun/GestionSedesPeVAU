@@ -103,6 +103,7 @@ public class CargaFicheros {
 		String ap2;
 		String nif;
 		List<Materia> materia = new ArrayList<Materia>();
+		//List<String> materia = new ArrayList<String>();
 		
 		try {
 			scan = new Scanner(new FileInputStream(fichero), "UTF-8");
@@ -117,9 +118,12 @@ public class CargaFicheros {
 				nif = scan.next();
 				while(scan.hasNext()) {
 					materia.add(new Materia(scan.next()));
+					//materia.add(scan.next());
 				}
 				
 				new Alumno(centro, nombre, ap1, ap2, nif, materia);
+				/*System.out.println(centro + " " + nombre+ " " + ap1 + " " + ap2 + " " + 
+									nif + " " + materia.toString());*/
 			}
 			
 		} catch (FileNotFoundException e) {
