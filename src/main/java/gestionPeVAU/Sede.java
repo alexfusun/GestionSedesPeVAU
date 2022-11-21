@@ -10,6 +10,16 @@ public class Sede {
 	private static String BD_PASSWORD = "Requisitos2022!";
 
 	private String Nombre;
+	
+	public static List<Sede> listaSedes() {
+		//Devuelve una lista con todas las sedes en BD
+		List<Sede> lista = new ArrayList<Sede>();
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		for(Object[] tupla:miBD.Select("SELECT Nombre FROM Sedes")) {
+			lista.add(new Sede((String)tupla[0],true));
+		}
+		return lista;
+	}
 
 	public Sede(String n) {
 		//Crea la sede y lo inserta en la BD, si ya esta creada no hace nada
@@ -41,16 +51,6 @@ public class Sede {
 			miBD.Update("UPDATE Sedes SET Nombre = '" + n + "' WHERE Nombre = '" + this.Nombre + "'");
 			this.Nombre = n;
 		}
-	}
-	
-	public static List<Sede> listaSedes() {
-		//Devuelve una lista con todas las sedes en BD
-		List<Sede> lista = new ArrayList<Sede>();
-		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
-		for(Object[] tupla:miBD.Select("SELECT Nombre FROM Sedes")) {
-			lista.add(new Sede((String)tupla[0],true));
-		}
-		return lista;
 	}
 	
 	public String toString()
