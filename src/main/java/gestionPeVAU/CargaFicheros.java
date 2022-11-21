@@ -94,4 +94,40 @@ public class CargaFicheros {
 			}
 		}
 	}
+	
+	public void cargarAlumnos(String fichero) {
+		Scanner scan = null;
+		String centro;
+		String nombre;
+		String ap1;
+		String ap2;
+		String nif;
+		List<Materia> materia = new ArrayList<Materia>();
+		
+		try {
+			scan = new Scanner(new FileInputStream(fichero), "UTF-8");
+			
+			scan.useDelimiter(";");
+			
+			while(scan.hasNextLine()) {
+				centro = scan.next();
+				nombre = scan.next();
+				ap1 = scan.next();
+				ap2 = scan.next();
+				nif = scan.next();
+				while(scan.hasNext()) {
+					materia.add(new Materia(scan.next()));
+				}
+				
+				new Alumno(centro, nombre, ap1, ap2, nif, materia);
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			scan.close();
+		}
+	}
 }
