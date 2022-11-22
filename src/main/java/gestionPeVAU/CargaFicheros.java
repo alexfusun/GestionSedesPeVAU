@@ -97,34 +97,46 @@ public class CargaFicheros {
 	
 	public void cargarAlumnos(String fichero) {
 		Scanner scan = null;
-		String centro;
-		String nombre;
-		String ap1;
-		String ap2;
-		String nif;
+		Scanner scanLinea = null;
+		String centro = null;
+		String nombre = null;
+		String ap1 = null;
+		String ap2 = null;
+		String nif = null;
+		String linea = null;
+		String m = null;
 		List<Materia> materia = new ArrayList<Materia>();
 		//List<String> materia = new ArrayList<String>();
 		
 		try {
 			scan = new Scanner(new FileInputStream(fichero), "UTF-8");
 			
-			scan.useDelimiter(";");
-			
 			while(scan.hasNextLine()) {
-				centro = scan.next();
-				nombre = scan.next();
-				ap1 = scan.next();
-				ap2 = scan.next();
-				nif = scan.next();
-				while(scan.hasNext()) {
+				linea = scan.nextLine();
+				scanLinea = new Scanner(linea);
+				scanLinea.useDelimiter(";");
+				
+				centro = scanLinea.next();
+				nombre = scanLinea.next();
+				ap1 = scanLinea.next();
+				ap2 = scanLinea.next();
+				nif = scanLinea.next();
+				m = scanLinea.next();
+				
+				scanLinea = new Scanner(m);
+				scanLinea.useDelimiter(",");
+				while(scanLinea.hasNext()) {
 					materia.add(new Materia(scan.next()));
-					//materia.add(scan.next());
+					//materia.add(scanLinea.next());
 				}
 				
 				new Alumno(centro, nombre, ap1, ap2, nif, materia);
 				/*System.out.println(centro + " " + nombre+ " " + ap1 + " " + ap2 + " " + 
 									nif + " " + materia.toString());*/
+				//materia = new ArrayList<String>();
+				materia = new ArrayList<Materia>();
 			}
+			
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
