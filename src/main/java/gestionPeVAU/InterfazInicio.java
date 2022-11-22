@@ -47,6 +47,9 @@ public class InterfazInicio extends JFrame {
 		JButton btnGestionSedes = new JButton("Gestionar Sedes");
 		btnGestionSedes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				InterfazGestionSedes iA = new InterfazGestionSedes();
+				iA.setVisible(true);
+				close();
 			}
 		});
 		btnGestionSedes.setBounds(10, 172, 177, 40);

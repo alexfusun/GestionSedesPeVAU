@@ -10,6 +10,7 @@ public class Sede {
 	private static String BD_PASSWORD = "Requisitos2022!";
 
 	private String Nombre;
+	private ResponsableDeSede Responsable;
 
 	public Sede(String n) {
 		//Crea la sede y lo inserta en la BD, si ya esta creada no hace nada
@@ -20,6 +21,9 @@ public class Sede {
 			
 		}
 		this.Nombre = n;
+		
+		Object[] tupla = miBD.Select("SELECT ResponsableNombre FROM Sedes WHERE Nombre = '" + n + "'").get(0);
+		this.Responsable = new ResponsableDeSede((String)tupla[0]);
 	}
 	
 	public Sede(String n,boolean mostrar) {
@@ -27,11 +31,12 @@ public class Sede {
 		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
 		Object[] tupla = miBD.Select("SELECT Nombre FROM Sedes WHERE Nombre = '" + n + "'").get(0);
 		this.Nombre = (String)tupla[0];
+		this.Responsable = null;
 	}
 	
 
 	public String getNombre() {
-		return Nombre;
+		return this.Nombre;
 	}
 
 	public void setNombre(String n) {
@@ -39,12 +44,33 @@ public class Sede {
 		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
 		Object[] tupla = miBD.Select("SELECT Nombre FROM Sedes WHERE Nombre = '" + this.Nombre + "'").get(0);
 		
-		if (tupla == null) {
+		if (tupla[0] == null) {
 			// error, ya existe una sede con el mismo nombre
 		} else {
 			miBD.Update("UPDATE Sedes SET Nombre = '" + n + "' WHERE Nombre = '" + this.Nombre + "'");
 			this.Nombre = n;
 		}
+	}
+	
+	public ResponsableDeSede getResponsable() {
+		return this.Responsable;
+		
+	}
+	
+	public void setResponsable(ResponsableDeSede r) {
+		//Asigna un responsable de sede
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		miBD.Update("UPDATE Sedes SET ResponsableNombre = '" + r.getNombre() + "' WHERE Nombre = '" + this.Nombre + "'");
+		
+		this.Responsable = r;
+	}
+	
+	public void desasignarResponsable() {
+		//Desasigna el responsable de sede
+		BD miBD = new BD(BD_SERVER,BD_NAME,BD_USER,BD_PASSWORD);
+		miBD.Update("UPDATE Sedes SET ResponsableNombre = null WHERE Nombre = '" + this.Nombre + "'" );
+		
+		this.Responsable = null;
 	}
 	
 	public static List<Sede> listaSedes() {
@@ -57,9 +83,19 @@ public class Sede {
 		return lista;
 	}
 	
+	
+	public void borrarSede() {
+		//Borrar un responsable en BD
+		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
+		miBD.Delete("DELETE Sedes WHERE Nombre = '" + this.Nombre + "'");
+		
+		this.Nombre = null;
+		this.Responsable = null;
+	}
+	
 	public String toString()
     {
-    	return this.Nombre + "\n";
+    	return this.Nombre;
     }
 
 }

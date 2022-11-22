@@ -51,7 +51,7 @@ public class BD
 		}
 		catch (SQLException ex)
 		{
-			throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
+			throw new Error("Error al Cerrar la Conexiï¿½n." + ex.getMessage());
 		}
     }
 	
