@@ -110,7 +110,7 @@ public class InterfazGestionSedes extends JFrame {
 		btnDesasignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sede seleccionada = Sede.listaSedes().get(table.getSelectedRow());
-				seleccionada.setResponsable(null);
+				seleccionada.desasignarResponsable();
 				actualizarTabla();
 			}
 		});

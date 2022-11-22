@@ -21,7 +21,9 @@ public class Sede {
 			
 		}
 		this.Nombre = n;
-		this.Responsable = null;
+		
+		Object[] tupla = miBD.Select("SELECT ResponsableNombre FROM Sedes WHERE Nombre = '" + n + "'").get(0);
+		this.Responsable = new ResponsableDeSede((String)tupla[0]);
 	}
 	
 	public Sede(String n,boolean mostrar) {
@@ -51,10 +53,7 @@ public class Sede {
 	}
 	
 	public ResponsableDeSede getResponsable() {
-		BD miBD = new BD(BD_SERVER, BD_NAME, BD_USER, BD_PASSWORD);
-		Object[] tupla = miBD.Select("SELECT ResponsableNombre FROM Sedes WHERE Nombre = '" + this.Nombre + "'").get(0);
-		ResponsableDeSede r = new ResponsableDeSede((String)tupla[0]);
-		return r;
+		return this.Responsable;
 		
 	}
 	
@@ -64,6 +63,14 @@ public class Sede {
 		miBD.Update("UPDATE Sedes SET ResponsableNombre = '" + r.getNombre() + "' WHERE Nombre = '" + this.Nombre + "'");
 		
 		this.Responsable = r;
+	}
+	
+	public void desasignarResponsable() {
+		//Desasigna el responsable de sede
+		BD miBD = new BD(BD_SERVER,BD_NAME,BD_USER,BD_PASSWORD);
+		miBD.Update("UPDATE Sedes SET ResponsableNombre = null WHERE Nombre = '" + this.Nombre + "'" );
+		
+		this.Responsable = null;
 	}
 	
 	public static List<Sede> listaSedes() {
